@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 178132589}
   m_Layer: 7
   m_Name: Climbing Tilemap
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6490,6 +6490,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &584188444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584188445}
+  - component: {fileID: 584188447}
+  - component: {fileID: 584188446}
+  m_Layer: 7
+  m_Name: Capsule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584188445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584188444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.025910988, y: 0.025910988, z: -0.7066319, w: 0.7066319}
+  m_LocalPosition: {x: 0.309, y: 4.104, z: 0.005320833}
+  m_LocalScale: {x: -0.0007, y: 0.5444, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146230560}
+  m_LocalEulerAnglesHint: {x: 4.2, y: 0, z: -90}
+--- !u!136 &584188446
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584188444}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0075559616
+  m_Height: 1.7968367
+  m_Direction: 1
+  m_Center: {x: -703.49225, y: -0.10158148, z: 0}
+--- !u!212 &584188447
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584188444}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &607971255
 GameObject:
   m_ObjectHideFlags: 0
@@ -6814,8 +6922,21 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1250106902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409423628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835f10cc10e6eb34eb1a8cfa197aeca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityAtStart: 5
 --- !u!1 &1280074081
 GameObject:
   m_ObjectHideFlags: 0
@@ -18788,6 +18909,38 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1 &2146230559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2146230560}
+  m_Layer: 0
+  m_Name: GameObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2146230560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146230559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.4961357, y: -0.017657116, z: -0.005320833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 584188445}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1012710006564585419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18883,7 +19036,7 @@ PrefabInstance:
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: ladderCollider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 178132589}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: playerCollider
       value: 
@@ -18911,6 +19064,9 @@ PrefabInstance:
       addedObject: {fileID: 1250106894}
     - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1250106902}
+    - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1250106898}
   m_SourcePrefab: {fileID: 100100000, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -18919,5 +19075,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1388308457}
   - {fileID: 1585695177}
+  - {fileID: 2146230560}
   - {fileID: 1012710006564585419}
   - {fileID: 555639497}
