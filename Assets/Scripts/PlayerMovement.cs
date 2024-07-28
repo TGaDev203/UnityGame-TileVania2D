@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         Vector2 inputVectorMove = InputManager.Instance.GetInputVectorMove();
+
         rigidBody.velocity = new Vector2(inputVectorMove.x * runSpeed, rigidBody.velocity.y);
     }
 
@@ -67,15 +68,28 @@ public class PlayerMovement : MonoBehaviour
 
             if (playerHasHorizontalSpeed || playerHasVerticalSpeed)
             {
-                Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, true);
 
-                Invoke("StopIgnoringCollision", 1f);
+                if (!capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) || InputManager.Instance.IsJumping())
+                {
+                    Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, true);
+
+                    ladderCollider.enabled = false;
+
+                    Invoke("StopIgnoringCollision", 1f);
+                }
+                else
+                {
+                    Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, false);
+
+                }
             }
         }
     }
 
     private void StopIgnoringCollision()
     {
+        ladderCollider.enabled = true;
+        
         Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, false);
     }
 }

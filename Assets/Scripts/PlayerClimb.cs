@@ -39,7 +39,9 @@ public class PlayerClimb : MonoBehaviour
         if (capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             Vector2 inputVectorClimb = InputManager.Instance.GetInputVectorClimb();
+
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, inputVectorClimb.y * climbSpeed);
+            
             rigidBody.gravityScale = 0f;
 
             if (IsAtTopOfLadder())
@@ -47,17 +49,11 @@ public class PlayerClimb : MonoBehaviour
                 if (InputManager.Instance.IsJumping())
                 {
                     rigidBody.gravityScale = gravityAtStart;
+                    
                     rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetJumpForce());
                 }
             }
-
-            else
-            {
-                if (InputManager.Instance.IsJumping())
-                {
-                    rigidBody.velocity = new Vector2(rigidBody.velocity.x > 0 ? playerMovement.GetJumpForce() : -playerMovement.GetJumpForce(), rigidBody.velocity.y);
-                }
-            }
+            else{}
         }
 
         else

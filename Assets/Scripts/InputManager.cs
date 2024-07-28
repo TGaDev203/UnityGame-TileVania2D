@@ -51,9 +51,15 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetInputVectorClimb()
     {
-        Vector2 inputVectorClim = playerInputAction.Player.Climb.ReadValue<Vector2>();
+        Vector2 inputVectorClimb = playerInputAction.Player.Climb.ReadValue<Vector2>();
 
-        return inputVectorClim.normalized;
+        return inputVectorClimb.normalized;
+    }
+
+    public Vector2 GetInputVectorJump()
+    {
+        Vector2 inputVectorJump = playerInputAction.Player.Jump.ReadValue<Vector2>();
+        return inputVectorJump;
     }
 
     public bool IsJumping()

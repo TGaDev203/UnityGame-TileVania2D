@@ -21,23 +21,6 @@ public class PlayerVisual : MonoBehaviour
         FlipSprite();
     }
 
-    // void FlipSprite()
-    // {
-    //     bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
-
-    //     if (playerHasHorizontalSpeed)
-    //     {
-    //         spriteRenderer.flipX = rigidBody.velocity.x < 0;
-    //         // transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
-    //         playerAnimator.SetBool("isRunning", true);
-    //     }
-
-    //     else
-    //     {
-    //         playerAnimator.SetBool("isRunning", false);
-    //     }
-    // }
-
     void FlipSprite()
     {
         bool playerHasHorizontalSpeed = rigidBody.velocity.x < Mathf.Epsilon;
