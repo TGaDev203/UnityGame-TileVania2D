@@ -10,7 +10,9 @@ public class PlayerVisual : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private CapsuleCollider2D capsuleCollider;
+    private CapsuleCollider2D playerCollider;
+
+    // private BoxCollider2D feetCollider;
 
     private Animator playerAnimation;
 
@@ -22,7 +24,9 @@ public class PlayerVisual : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
 
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
+
+        // feetCollider = GetComponent<BoxCollider2D>();
 
         playerAnimation = GetComponent<Animator>();
 
@@ -62,7 +66,7 @@ public class PlayerVisual : MonoBehaviour
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
 
-        if (capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && playerHasHorizontalSpeed)
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) && playerHasHorizontalSpeed)
         {
             playerAnimation.SetBool("isRunning", true);
         }
@@ -77,10 +81,8 @@ public class PlayerVisual : MonoBehaviour
     {
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
 
-        if (capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && playerHasVerticalSpeed)
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && playerHasVerticalSpeed)
         {
-            Debug.Log("OK");
-            
             playerAnimation.SetBool("isClimbing", true);
         }
 

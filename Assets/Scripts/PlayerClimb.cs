@@ -6,7 +6,7 @@ public class PlayerClimb : MonoBehaviour
 {
     private float gravityAtStart = 5f;
 
-    private CapsuleCollider2D capsuleCollider;
+    private CapsuleCollider2D playerCollider;
 
     private Rigidbody2D rigidBody;
 
@@ -16,7 +16,7 @@ public class PlayerClimb : MonoBehaviour
 
     private void Awake()
     {
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
 
         rigidBody = GetComponent<Rigidbody2D>();
 
@@ -36,34 +36,30 @@ public class PlayerClimb : MonoBehaviour
 
     private void Climb()
     {
-        if (capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             Vector2 inputVectorClimb = InputManager.Instance.GetInputVectorClimb();
 
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, inputVectorClimb.y * climbSpeed);
-            
+
             rigidBody.gravityScale = 0f;
 
-            if (IsAtTopOfLadder())
+            if (playerCollider.IsTouchingLayers(LayerMask.GetMask("TopLadder")))
             {
                 if (InputManager.Instance.IsJumping())
                 {
                     rigidBody.gravityScale = gravityAtStart;
-                    
+
                     rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetJumpForce());
                 }
             }
-            else{}
+
+            else { }
         }
 
         else
         {
             rigidBody.gravityScale = gravityAtStart;
         }
-    }
-
-    private bool IsAtTopOfLadder()
-    {
-        return capsuleCollider.IsTouchingLayers(LayerMask.GetMask("TopLadder"));
     }
 }

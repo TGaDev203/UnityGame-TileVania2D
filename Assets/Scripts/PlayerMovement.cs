@@ -11,10 +11,16 @@ using UnityEngine.Tilemaps;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Move Value")]
+
     [SerializeField] float runSpeed = 1f;
+
     [SerializeField] float jumpForce = 2f;
+
     private Rigidbody2D rigidBody;
-    private CapsuleCollider2D capsuleCollider;
+
+    private CapsuleCollider2D playerCollider;
+
+    private BoxCollider2D feetCollider;
 
     public TilemapCollider2D ladderCollider;
 
@@ -27,16 +33,20 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
 
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
 
         rigidBody = GetComponent<Rigidbody2D>();
 
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
+
+        feetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
     {
         Move();
+
+        BouncingMushroom();
     }
 
     private void Start()
@@ -57,24 +67,25 @@ public class PlayerMovement : MonoBehaviour
 
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
 
-        if (capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) || capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")))
+        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")))
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
 
             if (playerHasHorizontalSpeed || playerHasVerticalSpeed)
             {
 
-                if (!capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) || InputManager.Instance.IsJumping())
+                if (!playerCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || InputManager.Instance.IsJumping())
                 {
-                    Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, true);
+                    Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
 
                     ladderCollider.enabled = false;
 
                     Invoke("StopIgnoringCollision", 1f);
                 }
+
                 else
                 {
-                    Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, false);
+                    Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
 
                 }
             }
@@ -83,8 +94,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopIgnoringCollision()
     {
-        ladderCollider.enabled = true;
+        Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
 
-        Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, false);
+        ladderCollider.enabled = true;
+    }
+
+    private void BouncingMushroom()
+    {
+        bool isAtTopBouncing = playerCollider.IsTouchingLayers(LayerMask.GetMask("TopBouncing"));
+
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")) && isAtTopBouncing)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+        }
     }
 }

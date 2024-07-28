@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -163,22 +163,14 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape:
-    - - {x: 239, y: -48}
-      - {x: 80, y: -49}
-      - {x: 81, y: -112}
-      - {x: 128, y: -112}
-      - {x: 127, y: -276}
-      - {x: 50, y: -320}
-      - {x: -34, y: -320}
-      - {x: -112, y: -278}
-      - {x: -112, y: -112}
-      - {x: -64, y: -112}
-      - {x: -63, y: -49}
-      - {x: -225, y: -48}
-      - {x: -225, y: 82}
-      - {x: -170, y: 224}
-      - {x: 187, y: 224}
-      - {x: 239, y: 84}
+    - - {x: -192, y: 226}
+      - {x: -226, y: 188}
+      - {x: -226, y: -304}
+      - {x: -189, y: -322}
+      - {x: 182, y: -322}
+      - {x: 242, y: -248}
+      - {x: 242, y: 143}
+      - {x: 157, y: 226}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 1537655665
