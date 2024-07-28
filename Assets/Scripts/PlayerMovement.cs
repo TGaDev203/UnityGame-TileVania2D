@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     public TilemapCollider2D ladderCollider;
 
-    // private Animator playerAnimator;
-    // private SpriteRenderer spriteRenderer;
-
     public float GetJumpForce()
     {
         return this.jumpForce;
@@ -31,12 +28,10 @@ public class PlayerMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+
         rigidBody = GetComponent<Rigidbody2D>();
 
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
-
-        // playerAnimator = GetComponent<Animator>();
-        // spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -89,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     private void StopIgnoringCollision()
     {
         ladderCollider.enabled = true;
-        
+
         Physics2D.IgnoreCollision(capsuleCollider, ladderCollider, false);
     }
 }

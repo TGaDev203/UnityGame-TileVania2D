@@ -6916,6 +6916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1f84e635e719408b6dbd1492f3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ladderCollider: {fileID: 178132589}
 --- !u!50 &1250106898
 Rigidbody2D:
   serializedVersion: 4
@@ -6967,6 +6968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1f84e635e719408b6dbd1492f3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ladderCollider: {fileID: 0}
 --- !u!1 &1280074081
 GameObject:
   m_ObjectHideFlags: 0
