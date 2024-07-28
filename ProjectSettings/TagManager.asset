@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Ladder
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Mushroom
   - TopLadder
   - TopBouncing
-  - 
+  - Items
   - 
   - 
   - 
@@ -52,12 +53,15 @@ TagManager:
   - name: Water
     uniqueID: 2020695687
     locked: 0
-  - name: Player
-    uniqueID: 2871956615
-    locked: 0
   - name: Mushroom
     uniqueID: 2499403847
     locked: 0
   - name: Platforms
     uniqueID: 1930094207
+    locked: 0
+  - name: Player
+    uniqueID: 2871956615
+    locked: 0
+  - name: Coin
+    uniqueID: 312845549
     locked: 0

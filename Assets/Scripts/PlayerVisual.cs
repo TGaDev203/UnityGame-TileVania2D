@@ -12,7 +12,7 @@ public class PlayerVisual : MonoBehaviour
 
     private CapsuleCollider2D playerCollider;
 
-    // private BoxCollider2D feetCollider;
+    private BoxCollider2D feetCollider;
 
     private Animator playerAnimation;
 
@@ -26,7 +26,7 @@ public class PlayerVisual : MonoBehaviour
 
         playerCollider = GetComponent<CapsuleCollider2D>();
 
-        // feetCollider = GetComponent<BoxCollider2D>();
+        feetCollider = GetComponent<BoxCollider2D>();
 
         playerAnimation = GetComponent<Animator>();
 
@@ -42,9 +42,9 @@ public class PlayerVisual : MonoBehaviour
     {
         FlipSprite();
 
-        RunAnimation();
+        PlayerRunAnimation();
 
-        ClimbAnination();
+        PlayerClimbAnination();
     }
 
     private void FlipSprite()
@@ -62,11 +62,11 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
-    private void RunAnimation()
+    private void PlayerRunAnimation()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
 
-        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) && playerHasHorizontalSpeed)
+        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) && playerHasHorizontalSpeed)
         {
             playerAnimation.SetBool("isRunning", true);
         }
@@ -77,7 +77,7 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
-    private void ClimbAnination()
+    private void PlayerClimbAnination()
     {
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
 

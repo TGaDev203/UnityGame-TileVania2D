@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Move Value")]
 
-    [SerializeField] float runSpeed = 1f;
+    [SerializeField] float runSpeed;
 
-    [SerializeField] float jumpForce = 2f;
+    [SerializeField] float playerJumpForce;
+    
+    [SerializeField] float bouncingJumpForce;
 
     private Rigidbody2D rigidBody;
 
@@ -24,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
 
     public TilemapCollider2D ladderCollider;
 
-    public float GetJumpForce()
+    public float GetPlayerJumpForce()
     {
-        return this.jumpForce;
+        return this.playerJumpForce;
     }
 
     private void Awake()
@@ -69,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")))
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
 
             if (playerHasHorizontalSpeed || playerHasVerticalSpeed)
             {
@@ -86,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-
                 }
             }
         }
@@ -105,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")) && isAtTopBouncing)
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, bouncingJumpForce);
         }
     }
 }

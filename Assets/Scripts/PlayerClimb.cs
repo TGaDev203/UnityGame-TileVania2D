@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    private float gravityAtStart = 5f;
+    [SerializeField] float gravityAtStart;
 
     private CapsuleCollider2D playerCollider;
 
@@ -21,11 +21,6 @@ public class PlayerClimb : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         playerMovement = GetComponent<PlayerMovement>();
-
-    }
-
-    private void Start()
-    {
 
     }
 
@@ -50,7 +45,7 @@ public class PlayerClimb : MonoBehaviour
                 {
                     rigidBody.gravityScale = gravityAtStart;
 
-                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetJumpForce());
+                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetPlayerJumpForce());
                 }
             }
 
