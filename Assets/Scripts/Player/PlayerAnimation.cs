@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PlayerVisual : MonoBehaviour
 {
+    //! Component Variables
     private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rigidBody;
@@ -18,6 +16,7 @@ public class PlayerVisual : MonoBehaviour
 
     public TilemapCollider2D ladderCollider;
 
+    //! Lifecycle Methods
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,11 +32,6 @@ public class PlayerVisual : MonoBehaviour
         ladderCollider = GetComponent<TilemapCollider2D>();
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         FlipSprite();
@@ -47,6 +41,7 @@ public class PlayerVisual : MonoBehaviour
         PlayerClimbAnination();
     }
 
+    //! Flip Sprite
     private void FlipSprite()
     {
         bool playerHasBackwardSpeed = rigidBody.velocity.x < 0;
@@ -62,6 +57,7 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
+    //! Run Animation
     private void PlayerRunAnimation()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
@@ -77,6 +73,7 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
+    //! Climb Animation
     private void PlayerClimbAnination()
     {
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
@@ -86,7 +83,7 @@ public class PlayerVisual : MonoBehaviour
             playerAnimation.SetBool("isClimbing", true);
         }
 
-        else 
+        else
         {
             playerAnimation.SetBool("isClimbing", false);
         }

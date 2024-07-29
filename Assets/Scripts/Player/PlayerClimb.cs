@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    [SerializeField] float gravityAtStart;
+    //! Component Variables
+    [SerializeField] private float gravityAtStart;
+
+    [SerializeField] private float climbSpeed;
 
     private CapsuleCollider2D playerCollider;
 
     private Rigidbody2D rigidBody;
 
-    private float climbSpeed = 5f;
 
     private PlayerMovement playerMovement;
 
+    //! Lifecycle Methods
     private void Awake()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
@@ -21,7 +22,6 @@ public class PlayerClimb : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         playerMovement = GetComponent<PlayerMovement>();
-
     }
 
     private void Update()
@@ -29,6 +29,7 @@ public class PlayerClimb : MonoBehaviour
         Climb();
     }
 
+    //! Climbing Control
     private void Climb()
     {
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))

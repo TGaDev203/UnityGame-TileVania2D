@@ -1,22 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Move Value")]
+    //! Component Variables
+    [Header("Set Value")]
 
-    [SerializeField] float runSpeed;
+    [SerializeField] private float runSpeed;
 
-    [SerializeField] float playerJumpForce;
-    
-    [SerializeField] float bouncingJumpForce;
+    [SerializeField] private float playerJumpForce;
+
+    [SerializeField] private float bouncingJumpForce;
+
+    [SerializeField] private float buoyancyForce;
+
+    [SerializeField] private float waterDrag;
 
     private Rigidbody2D rigidBody;
 
@@ -26,11 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     public TilemapCollider2D ladderCollider;
 
-    public float GetPlayerJumpForce()
-    {
-        return this.playerJumpForce;
-    }
+    private bool isInWater = false;
 
+    //! Lifecycle Methods
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -44,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
+    private void Start()
+    {
+        InputManager.Instance.OnJump += Jump;
+    }
+
     private void Update()
     {
         Move();
@@ -51,11 +53,15 @@ public class PlayerMovement : MonoBehaviour
         BouncingMushroom();
     }
 
-    private void Start()
+    private void FixedUpdate()
     {
-        InputManager.Instance.OnJump += HandleJump;
+        if (isInWater)
+        {
+            rigidBody.AddForce(Vector2.up * buoyancyForce, ForceMode2D.Force);
+        }
     }
-
+    
+    //! Moving Control
     private void Move()
     {
         Vector2 inputVectorMove = InputManager.Instance.GetInputVectorMove();
@@ -63,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.velocity = new Vector2(inputVectorMove.x * runSpeed, rigidBody.velocity.y);
     }
 
-    private void HandleJump(object sender, EventArgs e)
+    //! Jumping Comtrol
+    private void Jump(object sender, EventArgs e)
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
 
@@ -82,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
                     ladderCollider.enabled = false;
 
-                    Invoke("StopIgnoringCollision", 1f);
+                    Invoke("StopIgnoringCollisionAfterJumping", 1f);
                 }
 
                 else
@@ -93,20 +100,54 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void StopIgnoringCollision()
+    private void StopIgnoringCollisionAfterJumping()
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
 
         ladderCollider.enabled = true;
     }
 
+    public float GetPlayerJumpForce()
+    {
+        return this.playerJumpForce;
+    }
+
+    //! Bouncing Player When Jumping In Mushroom
     private void BouncingMushroom()
     {
         bool isAtTopBouncing = playerCollider.IsTouchingLayers(LayerMask.GetMask("TopBouncing"));
 
-        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")) && isAtTopBouncing)
+        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")) && isAtTopBouncing)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, bouncingJumpForce);
         }
     }
+
+    //! On Trigger Enter
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            isInWater = false;
+
+            rigidBody.gravityScale = 0.5f;
+
+            rigidBody.drag = waterDrag;
+        }
+    }
+
+    //! On Trigger Exit
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            isInWater = false;
+
+            rigidBody.gravityScale = 0.5f;
+
+            rigidBody.drag = 0f;
+        }
+    }
+
+    
 }

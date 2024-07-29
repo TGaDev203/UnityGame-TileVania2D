@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Ladder
   - Coin
+  - Enemy
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - TopLadder
   - TopBouncing
   - Items
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -62,6 +64,12 @@ TagManager:
   - name: Player
     uniqueID: 2871956615
     locked: 0
+  - name: Enemy
+    uniqueID: 718242843
+    locked: 0
   - name: Coin
     uniqueID: 312845549
+    locked: 0
+  - name: UI
+    uniqueID: 3739781423
     locked: 0
