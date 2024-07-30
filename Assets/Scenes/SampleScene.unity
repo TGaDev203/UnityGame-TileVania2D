@@ -19796,7 +19796,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.026326656, y: -1.495495}
@@ -19883,7 +19883,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 718242843
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1105879277, guid: c911fed4b40622d45a78d381f3e1f3db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -20728,7 +20728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1950811403897991900, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: m_Size.x
@@ -20780,11 +20780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: waterDrag
-      value: 2
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: buoyancyForce
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: ladderCollider
@@ -20802,6 +20802,10 @@ PrefabInstance:
       propertyPath: BouncingCollider
       value: 
       objectReference: {fileID: 385154816}
+    - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
+      propertyPath: waterAngularDrag
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: bouncingJumpForce
       value: 22

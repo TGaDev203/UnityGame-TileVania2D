@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float waterDrag;
 
+    [SerializeField] private float waterAngularDrag;
+
     private Rigidbody2D rigidBody;
 
     private CapsuleCollider2D playerCollider;
@@ -126,28 +128,36 @@ public class PlayerMovement : MonoBehaviour
     //! On Trigger Enter
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Water"))
+        if (!isInWater && other.CompareTag("Water"))
         {
-            isInWater = false;
+            Debug.Log(other.gameObject.name + " Collision With: " + gameObject.name);
+
+            isInWater = true;
 
             rigidBody.gravityScale = 0.5f;
 
+            playerJumpForce = 40;
+
+            Debug.Log("Gravity Changed");
+
             rigidBody.drag = waterDrag;
+
+            rigidBody.angularDrag = waterAngularDrag;
         }
     }
 
     //! On Trigger Exit
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Water"))
+        if (isInWater && other.CompareTag("Water"))
         {
             isInWater = false;
 
             rigidBody.gravityScale = 0.5f;
 
             rigidBody.drag = 0f;
+
+            rigidBody.angularDrag = 0.05f;
         }
     }
-
-    
 }

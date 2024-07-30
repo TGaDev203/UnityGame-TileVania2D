@@ -34,12 +34,6 @@ public class InputManager : MonoBehaviour
         return inputVectorMove.normalized;
     }
 
-    public Vector2 GetInputVectorJump()
-    {
-        Vector2 inputVectorJump = playerInputAction.Player.Jump.ReadValue<Vector2>();
-        return inputVectorJump;
-    }
-
     private void OnEnable()
     {
         playerInputAction.Player.Jump.Enable();

@@ -61,11 +61,11 @@ TagManager:
   - name: Platforms
     uniqueID: 1930094207
     locked: 0
-  - name: Player
-    uniqueID: 2871956615
-    locked: 0
   - name: Enemy
     uniqueID: 718242843
+    locked: 0
+  - name: Player
+    uniqueID: 2871956615
     locked: 0
   - name: Coin
     uniqueID: 312845549
