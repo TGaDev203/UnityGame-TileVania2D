@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerVisual : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
     //! Component Variables
     private SpriteRenderer spriteRenderer;
@@ -13,8 +13,6 @@ public class PlayerVisual : MonoBehaviour
     private BoxCollider2D feetCollider;
 
     private Animator playerAnimation;
-
-    public TilemapCollider2D ladderCollider;
 
     //! Lifecycle Methods
     private void Awake()
@@ -28,8 +26,6 @@ public class PlayerVisual : MonoBehaviour
         feetCollider = GetComponent<BoxCollider2D>();
 
         playerAnimation = GetComponent<Animator>();
-
-        ladderCollider = GetComponent<TilemapCollider2D>();
     }
 
     private void Update()

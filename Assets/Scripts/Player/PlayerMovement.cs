@@ -19,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float waterAngularDrag;
 
+    [Header("Collision For Jumping")]
+    [SerializeField] LayerMask _layersPlayerCanJump;
+
+    [Header("Collider To Avoid Collider: Player And Ladder")]
+    [SerializeField] LayerMask _layerIgnorePlayerLadder;
+
     private Rigidbody2D rigidBody;
 
     private CapsuleCollider2D playerCollider;
@@ -62,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.AddForce(Vector2.up * buoyancyForce, ForceMode2D.Force);
         }
     }
-    
+
     //! Moving Control
     private void Move()
     {
@@ -74,38 +80,43 @@ public class PlayerMovement : MonoBehaviour
     //! Jumping Comtrol
     private void Jump(object sender, EventArgs e)
     {
+        if (!feetCollider.IsTouchingLayers(_layersPlayerCanJump))
+        {
+            return;
+        }
+
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
+
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
 
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
 
-        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || feetCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")))
+        if (!playerHasHorizontalSpeed || !playerHasVerticalSpeed)
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
-
-            if (playerHasHorizontalSpeed || playerHasVerticalSpeed)
-            {
-
-                if (!playerCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || InputManager.Instance.IsJumping())
-                {
-                    Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
-
-                    ladderCollider.enabled = false;
-
-                    Invoke("StopIgnoringCollisionAfterJumping", 1f);
-                }
-
-                else
-                {
-                    Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-                }
-            }
+            return;
         }
+
+        if (!playerCollider.IsTouchingLayers(_layerIgnorePlayerLadder) || InputManager.Instance.IsJumping())
+        {
+            Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
+
+            ladderCollider.enabled = false;
+
+            Invoke("StopIgnoringCollisionAfterJumping", 1f);
+        }
+
+        else
+        {
+            Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
+        }
+
+
     }
 
     private void StopIgnoringCollisionAfterJumping()
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-
+    
         ladderCollider.enabled = true;
     }
 
@@ -144,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
 
             rigidBody.angularDrag = waterAngularDrag;
         }
+
+        if (rigidBody.IsTouchingLayers(LayerMask.GetMask("Platform")))
+        {
+            playerJumpForce = 17;
+        }
     }
 
     //! On Trigger Exit
@@ -153,11 +169,13 @@ public class PlayerMovement : MonoBehaviour
         {
             isInWater = false;
 
-            rigidBody.gravityScale = 0.5f;
+            rigidBody.gravityScale = default;
 
-            rigidBody.drag = 0f;
+            rigidBody.drag = default;
 
-            rigidBody.angularDrag = 0.05f;
+            rigidBody.angularDrag = default;
+
+            playerJumpForce = default;
         }
     }
 }
