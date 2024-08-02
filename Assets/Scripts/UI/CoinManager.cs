@@ -1,14 +1,12 @@
 using TMPro;
 using UnityEngine;
 
-public class TotalCoin : MonoBehaviour
+public class CoinManager : MonoBehaviour
 {
-    //! Component Variables
+    //! Component
     [SerializeField] private TextMeshProUGUI coinText;
-
     private int totalCoinCollected = 0;
 
-    //! Lifecycle Methods
     private void Awake()
     {
         coinText = GetComponent<TextMeshProUGUI>();

@@ -5,31 +5,23 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //! Component Variables
+    //! Component
+    [Header("Collision For Jumping")]
+    [SerializeField] LayerMask _layersPlayerCanJump;
+    [Header("Collider To Avoid Collider: Player And Ladder")]
+    [SerializeField] LayerMask _layerIgnorePlayerLadder;
+    [Header("Collision For TopBouncing Point")]
+    [SerializeField] LayerMask _layerTopBouncingPoint;
     [Header("Set Value")]
 
     [SerializeField] private float runSpeed;
-
+    [SerializeField] private float playerJumpForceAtStart;
     [SerializeField] private float playerJumpForce;
-
     [SerializeField] private float bouncingJumpForce;
-
     [SerializeField] private float buoyancyForce;
-
     [SerializeField] private float waterDrag;
-
     [SerializeField] private float waterAngularDrag;
 
-
-    //! Component References For Player Physics And Collision Detection
-    [Header("Collision For Jumping")]
-    [SerializeField] LayerMask _layersPlayerCanJump;
-
-    [Header("Collider To Avoid Collider: Player And Ladder")]
-    [SerializeField] LayerMask _layerIgnorePlayerLadder;
-
-    [Header("Collision For TopBouncing Point")]
-    [SerializeField] LayerMask _layerTopBouncingPoint;
 
     private Rigidbody2D rigidBody;
 
@@ -41,17 +33,18 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isInWater = false;
 
-    //! Lifecycle Methods
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        InitializeComponents();
+    }
 
+    //! Initialization
+    private void InitializeComponents()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
-
         rigidBody = GetComponent<Rigidbody2D>();
-
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
-
         feetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
@@ -62,8 +55,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        HandleMovementAndBouncing();
+    }
 
+    //! Handle Movement and Bouncing
+    private void HandleMovementAndBouncing()
+    {
+        Move();
         BouncingMushroom();
     }
 
@@ -85,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get the input vector for movement from the InputManager
         Vector2 inputVectorMove = InputManager.Instance.GetInputVectorMove();
-
         rigidBody.velocity = new Vector2(inputVectorMove.x * runSpeed, rigidBody.velocity.y);
     }
 
@@ -103,14 +100,13 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
         HandleLadderCollision();
     }
 
     //! Bouncing Player When Jumping In Mushroom
     private void BouncingMushroom()
     {
-        if (IsplayerOnMushroom())
+        if (IsPlayerOnTopBouncingPoint())
         {
             ApplyBouncingJumpForce();
         }
@@ -148,20 +144,17 @@ public class PlayerMovement : MonoBehaviour
     private bool HasPlayerSpeed()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
-
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
-
         return playerHasHorizontalSpeed && playerHasVerticalSpeed;
     }
 
+    //! Avoid Ladder When Jumping
     private void HandleLadderCollision()
     {
         if (!playerCollider.IsTouchingLayers(_layerIgnorePlayerLadder) || InputManager.Instance.IsJumping())
         {
             Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
-
             ladderCollider.enabled = false;
-
             Invoke("StopIgnoringCollisionAfterJumping", 1f);
         }
 
@@ -174,12 +167,11 @@ public class PlayerMovement : MonoBehaviour
     private void StopIgnoringCollisionAfterJumping()
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-
         ladderCollider.enabled = true;
     }
 
-    //! Other Methods To Handle Jump If On Bouncing Mushroom
-    private bool IsplayerOnMushroom()
+    //! Other Methods To Handle Jumping If On Bouncing Mushroom
+    private bool IsPlayerOnTopBouncingPoint()
     {
         return playerCollider.IsTouchingLayers(_layerTopBouncingPoint);
     }
@@ -192,23 +184,15 @@ public class PlayerMovement : MonoBehaviour
     //! Other Methods To Handle Movement In Water
     private void EnterWater()
     {
-        rigidBody.gravityScale = 0.5f;
-
         playerJumpForce = 40;
-
         rigidBody.drag = waterDrag;
-
         rigidBody.angularDrag = waterAngularDrag;
     }
 
     private void ExitWater()
     {
-        rigidBody.gravityScale = default;
-
         rigidBody.drag = default;
-
         rigidBody.angularDrag = default;
-
-        playerJumpForce = default;
+        playerJumpForce = playerJumpForceAtStart;
     }
 }

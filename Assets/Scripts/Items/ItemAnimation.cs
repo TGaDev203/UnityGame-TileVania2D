@@ -20,26 +20,36 @@ public class ItemAnimation : MonoBehaviour
     {
         if (!hasBeenPicked && other.CompareTag("Player"))
         {
-            hasBeenPicked = true;
-
-            int coinValue = 1;
-
-            TotalCoin totalCoinCollected = FindObjectOfType<TotalCoin>();
-
-            if (totalCoinCollected != null)
-            {
-                totalCoinCollected.CountCoin(coinValue);
-            }
-
-            CoinFlipAnimation();
-
-            GetComponent<Collider2D>().enabled = false; // Turn off collider to avoid recollecting coin
-
-            Invoke("DestroyCoin", destroyDelay);
+            HandleCoinPickup();
         }
     }
 
-    //! Coin Flip Animation
+    //! Other Method To Handle Coin Animation
+    private void HandleCoinPickup()
+    {
+        hasBeenPicked = true;
+
+        IncrementCoinCount();
+
+        CoinFlipAnimation();
+
+        DisableCollider();
+
+        ScheduleDestroy();
+    }
+
+    private void IncrementCoinCount()
+    {
+        int coinValue = 1;
+
+        CoinManager totalCoinCollected = FindObjectOfType<CoinManager>();
+
+        if (totalCoinCollected != null)
+        {
+            totalCoinCollected.CountCoin(coinValue);
+        }    
+    }
+
     private void CoinFlipAnimation()
     {
         if (gameObject.CompareTag("Coin"))
@@ -48,7 +58,16 @@ public class ItemAnimation : MonoBehaviour
         }
     }
 
-    //! Destroying Coin
+    private void DisableCollider()
+    {
+        GetComponent<Collider2D>().enabled = false; // Turn off collider to avoid recollecting coin
+    }
+
+    private void ScheduleDestroy()
+    {
+        Invoke("DestroyCoin", destroyDelay);
+    }
+
     private void DestroyCoin()
     {
         Destroy(gameObject);
