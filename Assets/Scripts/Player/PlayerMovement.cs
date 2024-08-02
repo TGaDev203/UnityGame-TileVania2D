@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,11 +20,16 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float waterAngularDrag;
 
+
+    //! Component references for player physics and collision detection
     [Header("Collision For Jumping")]
     [SerializeField] LayerMask _layersPlayerCanJump;
 
     [Header("Collider To Avoid Collider: Player And Ladder")]
     [SerializeField] LayerMask _layerIgnorePlayerLadder;
+
+    [Header("Collision For TopBouncing Point")]
+    [SerializeField] LayerMask _layerTopBouncingPoint;
 
     private Rigidbody2D rigidBody;
 
@@ -69,9 +75,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public float GetPlayerJumpForce()
+    {
+        return this.playerJumpForce;
+    }
+
     //! Moving Control
     private void Move()
     {
+        // Get the input vector for movement from the InputManager
         Vector2 inputVectorMove = InputManager.Instance.GetInputVectorMove();
 
         rigidBody.velocity = new Vector2(inputVectorMove.x * runSpeed, rigidBody.velocity.y);
@@ -80,22 +92,72 @@ public class PlayerMovement : MonoBehaviour
     //! Jumping Comtrol
     private void Jump(object sender, EventArgs e)
     {
-        if (!feetCollider.IsTouchingLayers(_layersPlayerCanJump))
+        if (!CanPlayerJump())
         {
             return;
         }
 
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
+        ApplyJumpForce();
 
+        if (!HasPlayerSpeed())
+        {
+            return;
+        }
+
+        HandleLadderCollision();
+    }
+
+    //! Bouncing Player When Jumping In Mushroom
+    private void BouncingMushroom()
+    {
+        if (IsplayerOnMushroom())
+        {
+            ApplyBouncingJumpForce();
+        }
+    }
+
+    //! On Trigger Enter
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            EnterWater();
+        }
+
+        playerJumpForce = default;
+    }
+
+    //! On Trigger Exit
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            ExitWater();
+        }
+    }
+
+    //! Other Methods To Handle Jumping Logic
+    private bool CanPlayerJump()
+    {
+        return feetCollider.IsTouchingLayers(_layersPlayerCanJump);
+    }
+
+    private void ApplyJumpForce()
+    {
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
+    }
+
+    private bool HasPlayerSpeed()
+    {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
 
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
 
-        if (!playerHasHorizontalSpeed || !playerHasVerticalSpeed)
-        {
-            return;
-        }
+        return playerHasHorizontalSpeed && playerHasVerticalSpeed;
+    }
 
+    private void HandleLadderCollision()
+    {
         if (!playerCollider.IsTouchingLayers(_layerIgnorePlayerLadder) || InputManager.Instance.IsJumping())
         {
             Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
@@ -109,73 +171,46 @@ public class PlayerMovement : MonoBehaviour
         {
             Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
         }
-
-
     }
 
     private void StopIgnoringCollisionAfterJumping()
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-    
+
         ladderCollider.enabled = true;
     }
 
-    public float GetPlayerJumpForce()
+    //! Other Methods To Handle Jump If On Bouncing Mushroom
+    private bool IsplayerOnMushroom()
     {
-        return this.playerJumpForce;
+        return playerCollider.IsTouchingLayers(_layerTopBouncingPoint);
     }
 
-    //! Bouncing Player When Jumping In Mushroom
-    private void BouncingMushroom()
+    private void ApplyBouncingJumpForce()
     {
-        bool isAtTopBouncing = playerCollider.IsTouchingLayers(LayerMask.GetMask("TopBouncing"));
-
-        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom")) && isAtTopBouncing)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, bouncingJumpForce);
-        }
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, bouncingJumpForce);
     }
 
-    //! On Trigger Enter
-    private void OnTriggerEnter2D(Collider2D other)
+    //! Other Methods To Handle Movement In Water
+    private void EnterWater()
     {
-        if (!isInWater && other.CompareTag("Water"))
-        {
-            Debug.Log(other.gameObject.name + " Collision With: " + gameObject.name);
+        rigidBody.gravityScale = 0.5f;
 
-            isInWater = true;
+        playerJumpForce = 40;
 
-            rigidBody.gravityScale = 0.5f;
+        rigidBody.drag = waterDrag;
 
-            playerJumpForce = 40;
-
-            Debug.Log("Gravity Changed");
-
-            rigidBody.drag = waterDrag;
-
-            rigidBody.angularDrag = waterAngularDrag;
-        }
-
-        if (rigidBody.IsTouchingLayers(LayerMask.GetMask("Platform")))
-        {
-            playerJumpForce = 17;
-        }
+        rigidBody.angularDrag = waterAngularDrag;
     }
 
-    //! On Trigger Exit
-    private void OnTriggerExit2D(Collider2D other)
+    private void ExitWater()
     {
-        if (isInWater && other.CompareTag("Water"))
-        {
-            isInWater = false;
+        rigidBody.gravityScale = default;
 
-            rigidBody.gravityScale = default;
+        rigidBody.drag = default;
 
-            rigidBody.drag = default;
+        rigidBody.angularDrag = default;
 
-            rigidBody.angularDrag = default;
-
-            playerJumpForce = default;
-        }
+        playerJumpForce = default;
     }
 }

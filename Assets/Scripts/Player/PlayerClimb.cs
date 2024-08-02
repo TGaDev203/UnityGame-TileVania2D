@@ -1,8 +1,11 @@
 using UnityEngine;
 
+
 public class PlayerClimb : MonoBehaviour
 {
     //! Component Variables
+    [SerializeField] LayerMask _topLadderPoint;
+
     [SerializeField] private float gravityAtStart;
 
     [SerializeField] private float climbSpeed;
@@ -49,8 +52,6 @@ public class PlayerClimb : MonoBehaviour
                     rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetPlayerJumpForce());
                 }
             }
-
-            else { }
         }
 
         else
