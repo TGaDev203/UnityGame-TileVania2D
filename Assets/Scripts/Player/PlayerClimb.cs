@@ -14,8 +14,12 @@ public class PlayerClimb : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-
     private PlayerMovement playerMovement;
+
+    //! Component References For Player Physics And Collision Detection
+    [SerializeField] LayerMask _layerPlayerCanClimb;
+    
+
 
     //! Lifecycle Methods
     private void Awake()
@@ -35,7 +39,7 @@ public class PlayerClimb : MonoBehaviour
     //! Climbing Control
     private void Climb()
     {
-        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        if (playerCollider.IsTouchingLayers(_layerPlayerCanClimb))
         {
             Vector2 inputVectorClimb = InputManager.Instance.GetInputVectorClimb();
 

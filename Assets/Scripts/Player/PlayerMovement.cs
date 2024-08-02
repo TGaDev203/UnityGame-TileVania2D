@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float waterAngularDrag;
 
 
-    //! Component references for player physics and collision detection
+    //! Component References For Player Physics And Collision Detection
     [Header("Collision For Jumping")]
     [SerializeField] LayerMask _layersPlayerCanJump;
 
@@ -123,8 +123,6 @@ public class PlayerMovement : MonoBehaviour
         {
             EnterWater();
         }
-
-        playerJumpForce = default;
     }
 
     //! On Trigger Exit
