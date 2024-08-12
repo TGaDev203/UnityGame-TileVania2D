@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance {get; private set;}
+
     [SerializeField] private AudioClip hitEnemySound;
     [SerializeField] private AudioClip coinEnemySound;
 
@@ -19,6 +21,7 @@ public class SoundManager : MonoBehaviour
     private void InitializeComponents()
     {
         audioSource = GetComponent<AudioSource>();
+        Instance = this;
     }
 
     public void PlayerHitSound()

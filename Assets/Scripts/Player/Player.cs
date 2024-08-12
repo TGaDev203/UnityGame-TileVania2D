@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
 
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
-    private SoundManager soundManager;
     private float lastDamageTime;
 
     private void Awake()
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
-        soundManager = GetComponent<SoundManager>();
     }
 
     private void Start()
@@ -53,7 +51,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        soundManager.PlayerHitSound();
+        SoundManager.Instance.PlayerHitSound();
 
         if (currentHealth <= 0)
         {

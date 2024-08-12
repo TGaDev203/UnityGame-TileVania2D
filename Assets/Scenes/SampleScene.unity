@@ -5534,6 +5534,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2059853906}
     m_Modifications:
+    - target: {fileID: 737362691166319215, guid: c71ebf1ee4e5fa243bf0f89b9c5bc985, type: 3}
+      propertyPath: coinEnemySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f0894053b7631e41948a031fa3fe99a, type: 3}
     - target: {fileID: 4163203113907574769, guid: c71ebf1ee4e5fa243bf0f89b9c5bc985, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.85
@@ -5574,11 +5578,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5504137330964721880, guid: c71ebf1ee4e5fa243bf0f89b9c5bc985, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6395305029646673488, guid: c71ebf1ee4e5fa243bf0f89b9c5bc985, type: 3}
       propertyPath: m_Name
       value: Coin
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 737362691166319215, guid: c71ebf1ee4e5fa243bf0f89b9c5bc985, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7918,21 +7927,6 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   fill: {fileID: 1416698635}
---- !u!114 &1250106916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409423628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
-  coinEnemySound: {fileID: 0}
-  loadDelay: 0
 --- !u!82 &1250106917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20004,6 +19998,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 555639497}
+  - {fileID: 2049535858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710253900
@@ -21197,6 +21192,53 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &2049535857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049535858}
+  - component: {fileID: 2049535859}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2049535858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049535857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1669732140}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2049535859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049535857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
+  coinEnemySound: {fileID: 8300000, guid: 2f0894053b7631e41948a031fa3fe99a, type: 3}
+  loadDelay: 0
 --- !u!1 &2055508999
 GameObject:
   m_ObjectHideFlags: 0
@@ -21674,9 +21716,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1250106917}
-    - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1250106916}
   m_SourcePrefab: {fileID: 100100000, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
 --- !u!1001 &7957917774700605498
 PrefabInstance:

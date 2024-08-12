@@ -6,7 +6,6 @@ public class ItemAnimation : MonoBehaviour
     [SerializeField] private float destroyDelay;
 
     private Animator coinAnimation;
-    private SoundManager soundManager;
     private bool hasBeenPicked = false;
 
     //! Lifecycle Methods
@@ -19,7 +18,6 @@ public class ItemAnimation : MonoBehaviour
     private void InitializeComponents()
     {
         coinAnimation = GetComponent<Animator>();
-        soundManager = GetComponent<SoundManager>();
     }
 
     //! On Trigger Enter
@@ -38,7 +36,7 @@ public class ItemAnimation : MonoBehaviour
         IncrementCoinCount();
         CoinFlipAnimation();
         DisableCollider();
-        soundManager.PlayCoinSound();
+        SoundManager.Instance.PlayCoinSound();
         ScheduleDestroy();
     }
 
