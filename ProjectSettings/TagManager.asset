@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Enemy
   - Water
+  - Platform
   layers:
   - Default
   - TransparentFX

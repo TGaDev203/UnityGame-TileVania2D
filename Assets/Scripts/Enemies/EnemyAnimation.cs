@@ -11,6 +11,7 @@ public class EnemyAnimation : MonoBehaviour
         InitializeComponents();
     }
     
+    //! Initialization
     private void InitializeComponents()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

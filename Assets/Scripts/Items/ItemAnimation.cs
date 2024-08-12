@@ -3,16 +3,23 @@ using UnityEngine;
 public class ItemAnimation : MonoBehaviour
 {
     //! Component Variables
-    private Animator coinAnimation;
-
     [SerializeField] private float destroyDelay;
 
+    private Animator coinAnimation;
+    private SoundManager soundManager;
     private bool hasBeenPicked = false;
 
     //! Lifecycle Methods
     void Awake()
     {
+        InitializeComponents();
+    }
+
+    //! Initialization
+    private void InitializeComponents()
+    {
         coinAnimation = GetComponent<Animator>();
+        soundManager = GetComponent<SoundManager>();
     }
 
     //! On Trigger Enter
@@ -28,26 +35,21 @@ public class ItemAnimation : MonoBehaviour
     private void HandleCoinPickup()
     {
         hasBeenPicked = true;
-
         IncrementCoinCount();
-
         CoinFlipAnimation();
-
         DisableCollider();
-
+        soundManager.PlayCoinSound();
         ScheduleDestroy();
     }
 
     private void IncrementCoinCount()
     {
         int coinValue = 1;
-
         CoinManager totalCoinCollected = FindObjectOfType<CoinManager>();
-
         if (totalCoinCollected != null)
         {
             totalCoinCollected.CountCoin(coinValue);
-        }    
+        }
     }
 
     private void CoinFlipAnimation()

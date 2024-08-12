@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     //! Component
     [Header("Collision For Jumping")]
     [SerializeField] LayerMask _layersPlayerCanJump;
-    [Header("Collider To Avoid Collider: Player And Ladder")]
+    [Header("Collision To Avoid Collider: Player And Ladder")]
     [SerializeField] LayerMask _layerIgnorePlayerLadder;
     [Header("Collision For TopBouncing Point")]
     [SerializeField] LayerMask _layerTopBouncingPoint;

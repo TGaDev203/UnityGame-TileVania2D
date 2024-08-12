@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     //! On Trigger Exit
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         moveSpeed = -moveSpeed;
     }
