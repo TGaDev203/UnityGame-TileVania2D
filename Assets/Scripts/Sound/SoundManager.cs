@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance {get; private set;}
+    public static SoundManager Instance { get; private set; }
 
     [SerializeField] private AudioClip hitEnemySound;
     [SerializeField] private AudioClip coinEnemySound;
+    [SerializeField] private AudioClip waterSplashSound;
+    [SerializeField] private AudioClip waterWalkingSound;
 
     [SerializeField] private float loadDelay;
 
@@ -32,5 +34,26 @@ public class SoundManager : MonoBehaviour
     public void PlayCoinSound()
     {
         audioSource.PlayOneShot(coinEnemySound);
+    }
+
+    public void PlayWaterSplashSound()
+    {
+        audioSource.PlayOneShot(waterSplashSound);
+    }
+
+    public void PlayWaterWalkingSound()
+    {
+        audioSource.clip = waterWalkingSound;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    public void StopWaterWalkingSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.loop = false;
+            audioSource.Stop();
+        }
     }
 }

@@ -24,13 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Rigidbody2D rigidBody;
-
     private CapsuleCollider2D playerCollider;
-
     private BoxCollider2D feetCollider;
-
     public TilemapCollider2D ladderCollider;
-
     private bool isInWater = false;
 
     private void Awake()
@@ -184,6 +180,8 @@ public class PlayerMovement : MonoBehaviour
     //! Other Methods To Handle Movement In Water
     private void EnterWater()
     {
+        SoundManager.Instance.PlayWaterSplashSound();
+        SoundManager.Instance.PlayWaterWalkingSound();
         playerJumpForce = 40;
         rigidBody.drag = waterDrag;
         rigidBody.angularDrag = waterAngularDrag;
@@ -191,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ExitWater()
     {
+        SoundManager.Instance.StopWaterWalkingSound();
         rigidBody.drag = default;
         rigidBody.angularDrag = default;
         playerJumpForce = playerJumpForceAtStart;
