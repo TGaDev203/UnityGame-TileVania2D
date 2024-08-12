@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Ladder
+  - Coin
+  - Enemy
+  - Water
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -13,15 +17,15 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - Platform
   - Ladder
   - Player
   - BackGround
   - Mushroom
   - TopLadder
-  - 
-  - 
-  - 
+  - TopBouncing
+  - Items
+  - Enemy
   - 
   - 
   - 
@@ -52,12 +56,21 @@ TagManager:
   - name: Water
     uniqueID: 2020695687
     locked: 0
-  - name: Player
-    uniqueID: 2871956615
-    locked: 0
   - name: Mushroom
     uniqueID: 2499403847
     locked: 0
   - name: Platforms
     uniqueID: 1930094207
+    locked: 0
+  - name: Enemy
+    uniqueID: 718242843
+    locked: 0
+  - name: Player
+    uniqueID: 2871956615
+    locked: 0
+  - name: Coin
+    uniqueID: 312845549
+    locked: 0
+  - name: UI
+    uniqueID: 3739781423
     locked: 0
