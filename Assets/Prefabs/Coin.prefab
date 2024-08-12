@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEnemySound: {fileID: 0}
-  coinEnemySound: {fileID: 8300000, guid: d65e92a622f37c24495e8a3d95982e04, type: 3}
+  coinEnemySound: {fileID: 8300000, guid: 2f0894053b7631e41948a031fa3fe99a, type: 3}
   loadDelay: 0
 --- !u!82 &5504137330964721880
 AudioSource:
