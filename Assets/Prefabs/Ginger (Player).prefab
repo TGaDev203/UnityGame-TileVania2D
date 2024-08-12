@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 139308064039068067}
   - component: {fileID: 5939961127986457942}
   - component: {fileID: 4829320564196845773}
-  - component: {fileID: 8818909625142830547}
   - component: {fileID: 3606654535313660156}
   - component: {fileID: 1950811403897991900}
   - component: {fileID: 878012522377472218}
@@ -97,7 +96,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1423010681
-  m_SortingLayer: 4
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -283762242, guid: 86399cfe2fec3a745a23e035ec1a5457, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,33 +109,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &8818909625142830547
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314763095942416240}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &3606654535313660156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +121,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9236e02cf7cbe6a42a4797554d934b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layersPlayerCanJump:
+    serializedVersion: 2
+    m_Bits: 0
+  _layerIgnorePlayerLadder:
+    serializedVersion: 2
+    m_Bits: 0
+  _layerTopBouncingPoint:
+    serializedVersion: 2
+    m_Bits: 0
   runSpeed: 1
-  jumpForce: 5
-  climbSpeed: 5
+  playerJumpForceAtStart: 0
+  playerJumpForce: 0
+  bouncingJumpForce: 0
+  waterDrag: 0
+  ladderCollider: {fileID: 0}
 --- !u!70 &1950811403897991900
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

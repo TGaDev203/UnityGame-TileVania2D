@@ -18,16 +18,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerJumpForceAtStart;
     [SerializeField] private float playerJumpForce;
     [SerializeField] private float bouncingJumpForce;
-    [SerializeField] private float buoyancyForce;
+
     [SerializeField] private float waterDrag;
-    [SerializeField] private float waterAngularDrag;
 
 
     private Rigidbody2D rigidBody;
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
-    private bool isInWater = false;
 
     private void Awake()
     {
@@ -59,14 +57,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         BouncingMushroom();
-    }
-
-    private void FixedUpdate()
-    {
-        if (isInWater)
-        {
-            rigidBody.AddForce(Vector2.up * buoyancyForce, ForceMode2D.Force);
-        }
     }
 
     public float GetPlayerJumpForce()
@@ -184,7 +174,6 @@ public class PlayerMovement : MonoBehaviour
         SoundManager.Instance.PlayWaterWalkingSound();
         playerJumpForce = 40;
         rigidBody.drag = waterDrag;
-        rigidBody.angularDrag = waterAngularDrag;
     }
 
     private void ExitWater()

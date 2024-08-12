@@ -21627,7 +21627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: waterDrag
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: buoyancyForce
@@ -21655,7 +21655,7 @@ PrefabInstance:
       objectReference: {fileID: 385154816}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: waterAngularDrag
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3606654535313660156, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       propertyPath: bouncingJumpForce
@@ -21694,16 +21694,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 437328937836973750, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
-    - {fileID: 8818909625142830547, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
-      insertIndex: 4
+      insertIndex: 3
       addedObject: {fileID: 1250106894}
     - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
-      insertIndex: 5
+      insertIndex: 4
       addedObject: {fileID: 1250106902}
     - targetCorrespondingSourceObject: {fileID: 1314763095942416240, guid: a2bce5b8fdc7a1942a6a14f4ef660396, type: 3}
       insertIndex: -1
