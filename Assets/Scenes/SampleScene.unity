@@ -7930,7 +7930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEnemySound: {fileID: 8300000, guid: a4bc873f0b92ad64da4798b8f76ae01a, type: 3}
+  hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
+  coinEnemySound: {fileID: 0}
   loadDelay: 0
 --- !u!82 &1250106917
 AudioSource:
