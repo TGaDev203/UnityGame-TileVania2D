@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //! Components
+    [SerializeField] private float moveSpeed = 1f;
+
+    private Rigidbody2D rigidBody;
+
+    private void Awake()
     {
-        
+        InitializeComponents();
     }
 
-    // Update is called once per frame
-    void Update()
+    //! Initialization
+    private void InitializeComponents()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        Move();
+    }
+
+    //! Moving Control
+    private void Move()
+    {
+        rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
+    }
+
+    //! On Trigger Exit
+    void OnTriggerExit2D(Collider2D other)
+    {
+        moveSpeed = -moveSpeed;
     }
 }

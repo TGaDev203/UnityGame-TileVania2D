@@ -42,13 +42,13 @@ public class PlayerAnimation : MonoBehaviour
     //! Flip Sprite
     private void FlipSprite()
     {
-        bool playerHasBackwardSpeed = rigidBody.velocity.x < 0;
-        bool playerHasForwardSpeed = rigidBody.velocity.x > 0;
-        if (playerHasBackwardSpeed)
+        bool isMovingLeft = rigidBody.velocity.x < 0;
+        bool isMovingRight = rigidBody.velocity.x > 0;
+        if (isMovingLeft)
         {
             spriteRenderer.flipX = true;
         }
-        else if (playerHasForwardSpeed)
+        else if (isMovingRight)
         {
             spriteRenderer.flipX = false;
         }

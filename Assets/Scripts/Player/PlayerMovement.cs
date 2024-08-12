@@ -143,9 +143,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool HasPlayerSpeed()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
-        bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
-        return playerHasHorizontalSpeed && playerHasVerticalSpeed;
+        bool isMovingHorizontally = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
+        bool isMovingVertically = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
+        return isMovingHorizontally && isMovingVertically;
     }
 
     //! Avoid Ladder When Jumping
