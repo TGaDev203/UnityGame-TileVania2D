@@ -6,9 +6,9 @@ public class ItemAnimation : MonoBehaviour
     [SerializeField] private float destroyDelay;
 
     private Animator coinAnimation;
+    private Animator fishAnimation;
     private bool hasBeenPicked = false;
 
-    //! Lifecycle Methods
     void Awake()
     {
         InitializeComponents();
@@ -18,6 +18,17 @@ public class ItemAnimation : MonoBehaviour
     private void InitializeComponents()
     {
         coinAnimation = GetComponent<Animator>();
+        fishAnimation = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+
     }
 
     //! On Trigger Enter
@@ -71,5 +82,11 @@ public class ItemAnimation : MonoBehaviour
     private void DestroyCoin()
     {
         Destroy(gameObject);
+    }
+
+    //! Other Methods To Handle Fish Animation
+    private void FishSwimAnimation()
+    {
+        
     }
 }

@@ -71,6 +71,9 @@ TagManager:
   - name: Coin
     uniqueID: 312845549
     locked: 0
+  - name: Item
+    uniqueID: 936747235
+    locked: 0
   - name: UI
     uniqueID: 3739781423
     locked: 0

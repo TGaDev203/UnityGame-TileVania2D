@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour
 {
     //! Components
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidBody;
 
     private void Awake()
@@ -14,7 +13,6 @@ public class EnemyAnimation : MonoBehaviour
     //! Initialization
     private void InitializeComponents()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
