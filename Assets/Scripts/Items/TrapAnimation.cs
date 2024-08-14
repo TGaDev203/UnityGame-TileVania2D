@@ -15,21 +15,23 @@ public class TrapAnimation : MonoBehaviour
         trapAnimation = GetComponent<Animator>();
     }
 
+    //! On Trigger Enter
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             trapAnimation.SetBool("isTakenDamage", true);
-        }
-        else
-        {
-            trapAnimation.SetBool("isTakenDamage", false);
+            trapAnimation.SetBool("isReversed", false);
         }
     }
 
-    //! Method To Handle Trap Animation
-    // private void HandleTrapAnimation()
-    // {
-    //     trapAnimation.SetTrigger("TakenDamage");
-    // }
+    //! On Trigger Exit
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            trapAnimation.SetBool("isReversed", true);
+            trapAnimation.SetTrigger("takeDamage");
+        }
+    }
 }
