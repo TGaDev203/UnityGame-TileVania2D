@@ -21,16 +21,6 @@ public class ItemAnimation : MonoBehaviour
         fishAnimation = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-
-    }
-
     //! On Trigger Enter
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -82,11 +72,5 @@ public class ItemAnimation : MonoBehaviour
     private void DestroyCoin()
     {
         Destroy(gameObject);
-    }
-
-    //! Other Methods To Handle Fish Animation
-    private void FishSwimAnimation()
-    {
-        
     }
 }

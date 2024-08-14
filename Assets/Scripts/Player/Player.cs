@@ -4,12 +4,13 @@ public class Player : MonoBehaviour
 {
     //! Components
     [Header("Collision For Being Damaged")]
-    [SerializeField] private LayerMask _layerEnemy;
+    [SerializeField] private LayerMask _layerTakenDamage;
 
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float damageCooldown;
 
+    private TrapAnimation trapAnimation;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
     private float lastDamageTime;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
+        trapAnimation = GetComponent<TrapAnimation>();
     }
 
     private void Start()
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
 
     private bool IsTouchingEnemy()
     {
-        return playerCollider.IsTouchingLayers(_layerEnemy);
+        return playerCollider.IsTouchingLayers(_layerTakenDamage);
     }
 
     private void Die()
