@@ -1,5 +1,4 @@
 using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,15 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Collision For TopBouncing Point")]
     [SerializeField] LayerMask _layerTopBouncingPoint;
     [Header("Set Value")]
-
     [SerializeField] private float runSpeed;
     [SerializeField] private float playerJumpForceAtStart;
     [SerializeField] private float playerJumpForce;
     [SerializeField] private float bouncingJumpForce;
-
     [SerializeField] private float waterDrag;
-
-
     private Rigidbody2D rigidBody;
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;

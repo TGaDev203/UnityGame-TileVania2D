@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class MenuButtonManager : MonoBehaviour
 {
@@ -44,14 +45,19 @@ public class MenuButtonManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                Debug.Log("New Game");
+                Debug.Log("Continue");
                 break;
 
             case 1:
-                Debug.Log("Option");
+                Debug.Log("New Game");
+                SceneManager.LoadScene("Gameplay Scene");
                 break;
 
             case 2:
+                Debug.Log("Option");
+                break;
+
+            case 3:
                 Debug.Log("Quit");
                 break;
         }

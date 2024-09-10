@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        // UnityEditor.EditorApplication.isPlaying = false;
     }
 
     private void StartGame()

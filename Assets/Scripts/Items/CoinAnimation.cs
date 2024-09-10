@@ -6,7 +6,6 @@ public class ItemAnimation : MonoBehaviour
     [SerializeField] private float destroyDelay;
 
     private Animator coinAnimation;
-    private Animator fishAnimation;
     private bool hasBeenPicked = false;
 
     void Awake()
@@ -18,7 +17,6 @@ public class ItemAnimation : MonoBehaviour
     private void InitializeComponents()
     {
         coinAnimation = GetComponent<Animator>();
-        fishAnimation = GetComponent<Animator>();
     }
 
     //! On Trigger Enter
