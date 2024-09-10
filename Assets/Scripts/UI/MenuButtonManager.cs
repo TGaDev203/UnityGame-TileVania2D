@@ -39,7 +39,7 @@ public class MenuButtonManager : MonoBehaviour
 
     public void OnButtonClicked(int index)
     {
-        Debug.Log("Button " + index + "is pressed");
+        Debug.Log("Button " + index + " is pressed");
 
         switch (index)
         {
