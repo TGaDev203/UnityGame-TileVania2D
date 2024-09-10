@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     //! Components
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed;
 
     private Rigidbody2D rigidBody;
 

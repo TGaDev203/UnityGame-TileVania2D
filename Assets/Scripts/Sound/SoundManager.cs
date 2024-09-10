@@ -10,8 +10,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip waterSplashSound;
     [SerializeField] private AudioClip waterWalkingSound;
 
-    [SerializeField] private float loadDelay;
-
     private AudioSource audioSource;
 
     private void Awake()

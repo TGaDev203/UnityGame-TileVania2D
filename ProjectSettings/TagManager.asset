@@ -27,7 +27,7 @@ TagManager:
   - Items
   - Enemy
   - Trap
-  - 
+  - EndPoint
   - 
   - 
   - 
@@ -76,4 +76,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3739781423
+    locked: 0
+  - name: Effect
+    uniqueID: 3416636767
     locked: 0

@@ -10,6 +10,7 @@ public class TrapAnimation : MonoBehaviour
         InitializeComponents();
     }
 
+    //! Initialization
     private void InitializeComponents()
     {
         trapAnimation = GetComponent<Animator>();

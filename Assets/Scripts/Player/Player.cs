@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float damageCooldown;
-
-    private TrapAnimation trapAnimation;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
     private float lastDamageTime;
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
-        trapAnimation = GetComponent<TrapAnimation>();
     }
 
     private void Start()
@@ -36,6 +34,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGame();
+        }
         TouchingEnemy();
     }
 
@@ -69,5 +71,11 @@ public class Player : MonoBehaviour
     private void Die()
     {
         UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    private void StartGame()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
