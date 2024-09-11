@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip coinEnemySound;
     [SerializeField] private AudioClip waterSplashSound;
     [SerializeField] private AudioClip waterWalkingSound;
+    [SerializeField] private AudioClip menuButtonProgressSound;
+    [SerializeField] private AudioClip menuButtonEndSound;
 
     private AudioSource audioSource;
 
@@ -52,5 +54,15 @@ public class SoundManager : MonoBehaviour
             audioSource.loop = false;
             audioSource.Stop();
         }
+    }
+
+    public void PlayMenuButtonProgressSound()
+    {
+        audioSource.PlayOneShot(menuButtonProgressSound);
+    }
+
+    public void PlayMenuButtonEndSound()
+    {
+        audioSource.PlayOneShot(menuButtonEndSound);
     }
 }

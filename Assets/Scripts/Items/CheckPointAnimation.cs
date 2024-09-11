@@ -11,6 +11,7 @@ public class CheckPointAnimation : MonoBehaviour
         InitializeComponents();
     }
 
+    //! Initialization
     private void InitializeComponents()
     {
         endEffect = GetComponent<ParticleSystem>();

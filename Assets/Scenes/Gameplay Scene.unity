@@ -25216,7 +25216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669732140}
   m_Layer: 0
-  m_Name: Singleton Instance
+  m_Name: Singleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,6 +9,12 @@ public class CoinManager : MonoBehaviour
 
     private void Awake()
     {
+        InitializeComponents();
+    }
+
+    //! Initialization
+    private void InitializeComponents()
+    {
         coinText = GetComponent<TextMeshProUGUI>();
     }
 

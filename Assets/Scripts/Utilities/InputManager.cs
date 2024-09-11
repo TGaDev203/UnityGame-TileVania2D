@@ -11,6 +11,11 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
+    {
         Instance = this;
         playerInputAction = new PlayerAction();
     }
