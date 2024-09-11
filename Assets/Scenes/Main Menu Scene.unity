@@ -1119,7 +1119,10 @@ MonoBehaviour:
   - {fileID: 809674393}
   - {fileID: 322422075}
   - {fileID: 1354863545}
-  delaySound: 0.33
+  hoverColor: {r: 0.83137256, g: 0.45882353, b: 0.45882353, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  delayLoadScene: 0.35
+  coolDownTime: 0.35
 --- !u!1 &1816317059
 GameObject:
   m_ObjectHideFlags: 0

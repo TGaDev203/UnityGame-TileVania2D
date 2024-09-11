@@ -3,26 +3,26 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEditor;
+using System.Collections;
 
 public class MenuButtonManager : MonoBehaviour
 {
     //! Components
     [SerializeField] List<Button> buttons;
-    [SerializeField] private float delaySound;
-    private string sceneToLoad;
-    private int currentButtonIndex = 0;
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color normalColor;
+    [SerializeField] private float delayLoadScene;
+    [SerializeField] private float coolDownTime;
+    private string sceneToLoad;
+    private int currentButtonIndex;
+    private bool canPlayEndSound = true;
+    private bool canPlayProgressSound = true;
 
     private void Start()
     {
         SetButtonVisibility(0, false);
         AddButtonListeners();
-    }
-
-    private void Update()
-    {
-        HandleKeyBoardNavigation();
     }
 
     private void AddButtonListeners()
@@ -53,10 +53,16 @@ public class MenuButtonManager : MonoBehaviour
     {
         ChangeButtonColor(buttons[index], hoverColor);
         PlayProgressSound();
+        currentButtonIndex = index;
+        UpdateButton();
     }
 
     private void OnPointerExit(int index)
     {
+        if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
+        {
+            buttons[currentButtonIndex].OnDeselect(null);
+        }
         ChangeButtonColor(buttons[index], normalColor);
     }
 
@@ -77,7 +83,7 @@ public class MenuButtonManager : MonoBehaviour
             case 1:
                 PlayEndSound();
                 sceneToLoad = "Gameplay Scene";
-                Invoke("LoadScene", delaySound);
+                Invoke("LoadScene", delayLoadScene);
                 break;
 
             case 2:
@@ -86,6 +92,7 @@ public class MenuButtonManager : MonoBehaviour
 
             case 3:
                 PlayEndSound();
+                QuitGame();
                 break;
         }
     }
@@ -93,23 +100,6 @@ public class MenuButtonManager : MonoBehaviour
     private void LoadScene()
     {
         SceneManager.LoadScene(sceneToLoad);
-    }
-
-    private void HandleKeyBoardNavigation()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MoveToPreviousActiveButton();
-            PlayProgressSound();
-            UpdateButton();
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveToNextActiveButton();
-            PlayProgressSound();
-            UpdateButton();
-        }
     }
 
     private void UpdateButton()
@@ -140,33 +130,40 @@ public class MenuButtonManager : MonoBehaviour
         }
     }
 
-    private void MoveToPreviousActiveButton()
+    private void QuitGame()
     {
-        currentButtonIndex = (currentButtonIndex - 1 + buttons.Count) % buttons.Count;
-
-        while (!buttons[currentButtonIndex].gameObject.activeSelf)
-        {
-            currentButtonIndex = (currentButtonIndex - 1 + buttons.Count) % buttons.Count;
-        }
-    }
-
-    private void MoveToNextActiveButton()
-    {
-        currentButtonIndex = (currentButtonIndex + 1) % buttons.Count;
-
-        while (!buttons[currentButtonIndex].gameObject.activeSelf)
-        {
-            currentButtonIndex = (currentButtonIndex + 1) % buttons.Count;
-        }
+        Application.Quit();
     }
 
     private void PlayEndSound()
     {
+        if (canPlayEndSound)
+        {
         SoundManager.Instance.PlayMenuButtonEndSound();
+        StartCoroutine(ResetEndSoundCoolDown());
+        }
     }
 
     private void PlayProgressSound()
     {
+        if (canPlayProgressSound)
+        {
         SoundManager.Instance.PlayMenuButtonProgressSound();
+        StartCoroutine(ResetProgressSoundCoolDown());
+        }
+    }
+
+    private IEnumerator ResetEndSoundCoolDown()
+    {
+        canPlayEndSound = false;
+        yield return new WaitForSeconds(coolDownTime);
+        canPlayEndSound = true;
+    }
+
+    private IEnumerator ResetProgressSoundCoolDown()
+    {
+        canPlayProgressSound = false;
+        yield return new WaitForSeconds(coolDownTime);
+        canPlayProgressSound = true;
     }
 }
