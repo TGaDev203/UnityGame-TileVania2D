@@ -31,15 +31,18 @@ public class MenuButtonManager : MonoBehaviour
         {
             int index = i;
 
+            // Lấy GameObject từ Button để thêm EventTrigger
             GameObject buttonGameObject = buttons[i].gameObject;
 
             EventTrigger trigger = buttonGameObject.AddComponent<EventTrigger>();
 
+            // Thêm sự kiện cho khi chuột di chuyển vào Button
             EventTrigger.Entry entryEnter = new EventTrigger.Entry();
             entryEnter.eventID = EventTriggerType.PointerEnter;
             entryEnter.callback.AddListener((eventData) => { OnPointerEnter(index); });
             trigger.triggers.Add(entryEnter);
 
+            // Thêm sự kiện cho khi chuột rời khỏi Button
             EventTrigger.Entry entryExit = new EventTrigger.Entry();
             entryExit.eventID = EventTriggerType.PointerExit;
             entryExit.callback.AddListener((eventData) => { OnPointerExit(index); });
